@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#07090E">
 <title>MJ-SPoof &mdash; أداة تزييف الموقع بشكل كامل ومنظومة الحضور التلقائي</title>
@@ -916,8 +916,8 @@ a {
 /* INTERACTIVE IPHONE SHOWCASE SECTION */
 .workflow-wrap {
   display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: 44px;
+  grid-template-columns: 1fr;
+  gap: 24px;
   align-items: center;
 }
 
@@ -1573,6 +1573,99 @@ img, svg {
   }
 }
 
+/* Keep mobile pages within the viewport and cards side by side */
+@media (max-width: 760px) {
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    overflow-x: clip;
+    touch-action: pan-y;
+  }
+
+  .nav-links {
+    flex: 0 0 100%;
+    width: 100%;
+    margin-inline: 0;
+    padding: 4px 0 7px;
+    flex-wrap: wrap;
+    overflow: hidden;
+    white-space: normal;
+    gap: 2px 14px;
+  }
+
+  .nav-links li {
+    max-width: 100%;
+  }
+
+  .general-features-grid,
+  .apps-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .gen-card,
+  .app-card {
+    min-width: 0;
+    padding: 14px 11px;
+    overflow-wrap: anywhere;
+  }
+
+  .gen-card-title,
+  .app-card-titles h3 {
+    font-size: 15px;
+    line-height: 1.4;
+  }
+
+  .gen-card-desc,
+  .app-feature-item,
+  .app-highlight-box,
+  .app-card-subtitle {
+    font-size: 11px;
+    line-height: 1.55;
+  }
+
+  .app-card-header {
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .app-card-icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  .app-card-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .app-card-actions .btn {
+    flex-basis: auto;
+    width: 100%;
+    padding-inline: 7px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 390px) {
+  .general-features-grid,
+  .apps-grid {
+    gap: 8px;
+  }
+
+  .gen-card,
+  .app-card {
+    padding: 12px 9px;
+  }
+
+  .gen-card-title,
+  .app-card-titles h3 {
+    font-size: 14px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -1949,87 +2042,11 @@ img, svg {
       <span class="sec-badge">طريقة التشغيل</span>
       <h2 class="sec-title">طريقة ظهور الأداة وتفعيلها من داخل التطبيق</h2>
       <p class="sec-desc">
-        تجربة استخدام استثنائية دون أي تعقيد تقني أو ربط بالحاسوب. انقر على الخطوات أدناه لرؤية المحاكاة الحية على شاشة الآيفون.
+        تجربة استخدام استثنائية دون أي تعقيد تقني أو ربط بالحاسوب. اتبع الخطوات أدناه لمعرفة طريقة التشغيل والتفعيل.
       </p>
     </div>
 
     <div class="workflow-wrap">
-      <!-- Phone Simulator Mockup (Left) -->
-      <div class="device-stage">
-        <div class="iphone-frame">
-          <div class="iphone-dynamic-island"></div>
-          <div class="iphone-screen">
-            <div class="screen-mock-app">
-              <div class="mock-app-bar">
-                <span style="font-size:11px; font-weight:700; color:var(--gold);">معاً / حضوري &middot; الشاشة</span>
-                <span class="status-dot"></span>
-              </div>
-
-              <div class="mock-card">
-                <div style="font-size:10px; color:var(--tx-muted); margin-bottom:4px;">حالة التموضع الجغرافي</div>
-                <div style="font-size:12px; font-weight:700; color:#34D399;">داخل النطاق المعتمد &check;</div>
-              </div>
-
-              <div class="mock-card" style="flex:1; background:rgba(255,255,255,0.02); display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
-                <div style="font-size:11px; color:var(--tx-muted); margin-bottom:8px;">إجراء تسجيل الحضور</div>
-                <div style="width:70px; height:70px; border-radius:50%; border:2px dashed var(--gold); display:grid; place-items:center; color:var(--gold); font-size:11px; font-weight:700;">
-                  بصمة
-                </div>
-              </div>
-
-              <!-- Two-finger Touch Hint -->
-              <div class="touch-gesture-hint" id="touchHint">
-                <div class="touch-finger"></div>
-                <div class="touch-finger"></div>
-              </div>
-
-              <!-- Sheet 1: First-time Activation Screen -->
-              <div class="injected-sheet" id="sheetActivate">
-                <div class="sheet-handle"></div>
-                <div class="sheet-title">
-                  <span>🔐 شاشة تفعيل الترخيص</span>
-                  <span style="font-size:9.5px; background:rgba(212,175,55,0.2); color:var(--gold-light); padding:2px 6px; border-radius:4px;">لأول مرة</span>
-                </div>
-                <div style="font-size:11px; color:var(--tx-secondary); margin-bottom:10px; line-height:1.5;">
-                  أدخل مفتاح الاشتراك لربط الجهاز وتفعيل الأداة:
-                </div>
-                <div style="background:rgba(0,0,0,0.5); border:1px solid var(--border-gold); border-radius:8px; padding:8px 10px; font-family:var(--font-mono); font-size:11.5px; color:#fff; text-align:center; margin-bottom:10px;">
-                  SP-9F3A-K2M7-QX4B
-                </div>
-                <button class="btn btn--primary btn--sm" id="phoneActivateBtn" style="width:100%; height:32px; font-size:11.5px;" type="button">
-                  تفعيل المفتاح الآن
-                </button>
-                <div id="phoneActivateMsg" style="display:none; font-size:10.5px; color:#34D399; text-align:center; margin-top:8px; font-weight:600;">
-                  ✓ تم تفعيل الجهاز بنجاح!
-                </div>
-              </div>
-
-              <!-- Sheet 2: Tool HUD (Already Activated) -->
-              <div class="injected-sheet" id="sheetSpoof">
-                <div class="sheet-handle"></div>
-                <div class="sheet-title">
-                  <span>MJ-SPoof Console</span>
-                  <span style="font-size:9.5px; background:rgba(16,185,129,0.2); color:var(--emerald-light); padding:2px 6px; border-radius:4px;">مفعّل ونشط</span>
-                </div>
-                <div style="height:90px; background:#080B10; border-radius:8px; border:1px solid var(--border-gold); margin-bottom:10px; display:flex; flex-direction:column; align-items:center; justify-content:center; color:var(--gold); font-size:10.5px; gap:4px;">
-                  <div>🛰️ قمر صناعي &middot; الموقع محدد</div>
-                  <div class="mono" style="font-size:9.5px; color:var(--tx-secondary);">24.713600° N, 46.675300° E</div>
-                  <div style="font-size:9.5px; color:var(--emerald-light);">التذبذب: ±4.5م نشط</div>
-                </div>
-                <div style="display:flex; gap:6px; margin-bottom:8px;">
-                  <button class="btn btn--primary btn--sm" style="flex:1; height:30px; font-size:11px;" type="button">تطبيق الموقع المزيّف</button>
-                  <button class="btn btn--secondary btn--sm" style="height:30px; padding:0 8px; font-size:11px;" type="button" title="جدولة الحضور (لمعاً)">⏰</button>
-                </div>
-                <div style="font-size:10px; color:var(--emerald-light); text-align:center;">
-                  ✓ الأداة نشطة وتزيف الموقع بنجاح
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Step Cards (Right) -->
       <div class="workflow-steps">
         <div class="workflow-step active" data-step="1">
           <div class="step-header">
